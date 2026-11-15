@@ -1,0 +1,184 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "rex-sesh",
+  "title": "Rex Sesh",
+  "description": "Smart session manager for Rex, inspired by sesh. Combines live Rex sessions, configured sessions, and zoxide directories.",
+  "icon": "icon.png",
+  "author": "xheisenbugx",
+  "categories": [
+    "Developer Tools",
+    "Productivity"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "sessions",
+      "title": "Search Sessions",
+      "subtitle": "Rex Sesh",
+      "description": "Connect to a live Rex session, or create one from a configured session or zoxide directory.",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "shortcutConnectWithOptions",
+          "title": "Shortcut: Create with Options",
+          "description": "Keyboard shortcut for “Create with Options”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+shift+enter. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+shift+enter"
+        },
+        {
+          "name": "shortcutRename",
+          "title": "Shortcut: Rename Session",
+          "description": "Keyboard shortcut for “Rename Session”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+e. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+e"
+        },
+        {
+          "name": "shortcutKill",
+          "title": "Shortcut: Kill Session",
+          "description": "Keyboard shortcut for “Kill Session”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for ctrl+x. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "ctrl+x"
+        },
+        {
+          "name": "shortcutTogglePreview",
+          "title": "Shortcut: Toggle Preview",
+          "description": "Keyboard shortcut for “Toggle Preview”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+shift+p. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+shift+p"
+        },
+        {
+          "name": "shortcutNewSession",
+          "title": "Shortcut: New Session",
+          "description": "Keyboard shortcut for “New Session”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+n. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+n"
+        },
+        {
+          "name": "shortcutRefresh",
+          "title": "Shortcut: Refresh",
+          "description": "Keyboard shortcut for “Refresh”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+shift+r. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+shift+r"
+        },
+        {
+          "name": "shortcutShowInFinder",
+          "title": "Shortcut: Show in Finder",
+          "description": "Keyboard shortcut for “Show in Finder”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+o. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+o"
+        },
+        {
+          "name": "shortcutCopyPath",
+          "title": "Shortcut: Copy Path",
+          "description": "Keyboard shortcut for “Copy Path”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+shift+c. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+shift+c"
+        },
+        {
+          "name": "shortcutEditConfig",
+          "title": "Shortcut: Edit Config",
+          "description": "Keyboard shortcut for “Edit Config”, e.g. cmd+shift+p, ctrl+x or ⌘⇧P. Leave empty for cmd+shift+,. Enter none to turn it off.",
+          "type": "textfield",
+          "required": false,
+          "placeholder": "cmd+shift+,"
+        }
+      ]
+    },
+    {
+      "name": "create-session",
+      "title": "Create Session",
+      "subtitle": "Rex Sesh",
+      "description": "Create a Rex session in a chosen directory.",
+      "mode": "view"
+    },
+    {
+      "name": "next-session",
+      "title": "Next Session",
+      "subtitle": "Rex Sesh",
+      "description": "Switch the Rex app to the next session.",
+      "mode": "no-view"
+    },
+    {
+      "name": "previous-session",
+      "title": "Previous Session",
+      "subtitle": "Rex Sesh",
+      "description": "Switch the Rex app to the previous session.",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "rexPath",
+      "title": "Rex CLI Path",
+      "description": "Absolute path to the rex binary. Leave empty to auto-detect.",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "configPath",
+      "title": "Config File",
+      "description": "sesh-compatible TOML config. Defaults to ~/.config/rex-sesh/sesh.toml, falling back to ~/.config/sesh/sesh.toml.",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "client",
+      "title": "Rex Client",
+      "description": "Label or ID of the Rex app to control. Leave empty to use the first connected app.",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "showZoxide",
+      "title": "Sources",
+      "label": "Show zoxide directories",
+      "description": "Include zoxide directories in the list.",
+      "type": "checkbox",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "showPreview",
+      "label": "Show preview panel by default",
+      "description": "Show a terminal / directory preview beside the list.",
+      "type": "checkbox",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "useDefaultStartup",
+      "label": "Run default startup command",
+      "description": "Run [default_session].startup_command in new sessions that have no command of their own.",
+      "type": "checkbox",
+      "default": true,
+      "required": false
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.104.0",
+    "@raycast/utils": "^2.2.0",
+    "smol-toml": "^1.4.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  }
+}
